@@ -13,7 +13,7 @@ A fictional bakery manager can edit tomorrow's capacities, product economics and
 - [x] (2026-10-09) Independently enumerate default:2,681feasible, unique5/5/18,$955,use470/600/360; rational LP vertices confirm955.
 - [x] (2026-10-09) Implement pure model, worker lifecycle and complete UI.
 - [x] (2026-10-09) Actual browser suite 22/22, production default/tiny/manual/copy/infeasible/zero/negative/cancel/retry, keyboard and native Back checks; desktop/narrow visuals.
-- [ ] Freeze source and complete clean pre/post final evaluation.
+- [x] (2026-10-09) Freeze 2e4eef40bf2091800e2f07c0144888c6b264f8ee; clean pre/post source/PLAN, fresh build, final 22/22 and maximum-money narrow production evidence.
 - [ ] Iterate with independent reviewer to PASS; coordinator publishes.
 
 ## Surprises & Discoveries
@@ -65,3 +65,5 @@ Scenario: capacities[3] and products[3], each with contribution(integercents), m
 Initial plan written2026-10-09after actual student confirmation.
 
 Update 2026-10-09: implementation and exploratory checks completed. Native UI cancellation was observed while the local solver was loading, followed by successful default recovery. Native Back returned coherent defaults before any new solve action. No persisted bfcache or real limited-incumbent timeout was observed.
+
+Final evaluation update 2026-10-09: supported maximum scenario $150,000 was rendered in the actual 320 CSS-pixel production frame, with document widths 319/319 and a readable full label. Source remains frozen; only reports changed. Coordinator independent UI witness and reviewer reconciliation are finishing.
