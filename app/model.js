@@ -1,6 +1,6 @@
 export const names = ['Breakfast boxes', 'Tea boxes', 'Celebration boxes'];
 export const resources = ['Prep labor', 'Oven', 'Packing'];
-export const defaults = { capacities: [480, 600, 360], products: [
+export const defaults = { capacities: [480, 590, 360], products: [
   { contribution: 2500, min: 4, max: 24, use: [12, 18, 8] },
   { contribution: 2200, min: 3, max: 30, use: [10, 12, 10] },
   { contribution: 4000, min: 2, max: 18, use: [20, 25, 15] },
@@ -10,7 +10,7 @@ export const tiny = { capacities: [8, 8, 6], products: [
   { contribution: 400, min: 0, max: 8, use: [1, 2, 1] },
   { contribution: 0, min: 0, max: 0, use: [1, 1, 1] },
 ] };
-export const money = cents => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cents / 100);
+export const money = cents => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(cents / 100);
 export const number = value => new Intl.NumberFormat('en-US', { maximumFractionDigits: 4 }).format(value);
 const tolerance = 1e-6;
 
@@ -84,4 +84,20 @@ export function rationale(s, result) {
 export function parseCents(value) {
   if (!/^-?(?:\d+\.?\d{0,2}|\.\d{1,2})$/.test(value)) return NaN;
   return Math.round(Number(value) * 100);
+}
+
+// All pairwise boundary intersections, filtered by the actual two-product inequalities.
+export function feasibleRegion(s) {
+ if(s.products[2].max!==0)return null;
+ const lines=s.capacities.map((c,r)=>[s.products[0].use[r],s.products[1].use[r],c]);
+ s.products.slice(0,2).forEach((p,i)=>lines.push(i?[0,-1,-p.min]:[-1,0,-p.min],i?[0,1,p.max]:[1,0,p.max]));
+ const vertices=[];
+ for(let i=0;i<lines.length;i++)for(let j=i+1;j<lines.length;j++){
+  const [a,b,c]=lines[i],[d,e,f]=lines[j],det=a*e-b*d;
+  if(!det)continue;
+  const x=(c*e-b*f)/det,y=(a*f-c*d)/det;
+  if(lines.every(([a,b,c])=>a*x+b*y<=c+1e-8)&&!vertices.some(v=>Math.hypot(v[0]-x,v[1]-y)<1e-8))vertices.push([x,y]);
+ }
+ const center=vertices.reduce((sum,v)=>[sum[0]+v[0]/vertices.length,sum[1]+v[1]/vertices.length],[0,0]);
+ return vertices.sort((a,b)=>Math.atan2(a[1]-center[1],a[0]-center[0])-Math.atan2(b[1]-center[1],b[0]-center[0]));
 }

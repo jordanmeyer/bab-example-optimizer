@@ -1,4 +1,4 @@
-import { defaults, tiny, validate, parseCents, allocation, interpret, rationale } from '../app/model.js';
+import { defaults, tiny, validate, parseCents, allocation, interpret, rationale, feasibleRegion } from '../app/model.js';
 import { createSolver } from '../app/solver-client.js';
 const clone = x => structuredClone(x);
 const assert = (value, message = 'Assertion failed') => { if (!value) throw Error(message); };
@@ -22,15 +22,15 @@ test('Validation: positive use, whole bounded quantities/capacities, finite mone
   for (const edit of [s=>s.capacities[0]=NaN,s=>s.capacities[0]=-1,s=>s.capacities[0]=10001,s=>s.products[0].use[0]=0,s=>s.products[0].use[0]=1.5,s=>s.products[0].max=101,s=>s.products[0].contribution=Infinity,s=>s.products[0].min=30]) { const s=clone(defaults); edit(s); assert(validate(s).length > 0); }
 });
 test('Independent manual accounting:4/3/2 uses118/158/92 and contributes$246', () => {
-  const p=allocation(defaults,[4,3,2]);equal(p.used,[118,158,92]);equal(p.objective,24600);equal(p.slack,[362,442,268]);assert(p.feasible);
+  const p=allocation(defaults,[4,3,2]);equal(p.used,[118,158,92]);equal(p.objective,24600);equal(p.slack,[362,432,268]);assert(p.feasible);
 });
 test('Manual allocation distinguishes fractional, commitment, demand and resource violations', () => {
   assert(!allocation(defaults,[4.5,3,2]).feasible);assert(!allocation(defaults,[0,0,0]).feasible);assert(!allocation(defaults,[25,3,2]).feasible);assert(!allocation(defaults,[24,30,18]).feasible);
 });
-test('Actual worker: default unique5/5/18,$955,use470/600/360,slack10/0/0', async () => {
-  defaultResult=await solve(defaults);const p=defaultResult.integer.plan;equal(defaultResult.integer.status,'Optimal');equal(p.quantities,[5,5,18]);equal(p.objective,95500);equal(p.used,[470,600,360]);equal(p.slack,[10,0,0]);
+test('Actual worker: default unique5/8/16,$941,use460/586/360,slack20/4/0', async () => {
+  defaultResult=await solve(defaults);const p=defaultResult.integer.plan;equal(defaultResult.integer.status,'Optimal');equal(p.quantities,[5,8,16]);equal(p.objective,94100);equal(p.used,[460,586,360]);equal(p.slack,[20,4,0]);
 });
-test('Actual relaxation matches independent exact LP certificate955', () => {assert(defaultResult.relaxation.optimal);near(defaultResult.relaxation.plan.objective,95500);});
+test('Actual relaxation matches independent exact LP certificate946', () => {assert(defaultResult.relaxation.optimal);near(defaultResult.relaxation.plan.objective,94600);});
 test('Actual worker: tiny integer3/2/0,$23 versus LP8/3,8/3,0,$24', async () => {
   tinyResult=await solve(tiny);equal(tinyResult.integer.plan.quantities,[3,2,0]);equal(tinyResult.integer.plan.objective,2300);near(tinyResult.relaxation.plan.quantities[0],8/3);near(tinyResult.relaxation.plan.quantities[1],8/3);near(tinyResult.relaxation.plan.objective,2400);
 });
@@ -64,7 +64,10 @@ test('New request supersedes old worker; stale promise aborts and tiny result re
   const client=createSolver();const old=client.solve(defaults).then(()=>false,e=>e.name==='AbortError');const fresh=client.solve(tiny);assert(await old);equal((await fresh).integer.plan.objective,2300);
 });
 test('Copied rationale includes exact solved coefficients, boxes, slack and model limits', () => {
-  const text=rationale(defaults,defaultResult);for(const word of ['$955.00','Breakfast boxes 5 (60 boxes)','Packing: 360 / 360','slack 10','12/18/8','minimum commitments','synthetic','not revenue'])assert(text.includes(word),word);
+  const text=rationale(defaults,defaultResult);for(const word of ['$941','Breakfast boxes 5 (60 boxes)','Packing: 360 / 360','slack 20','12/18/8','minimum commitments','synthetic','not revenue'])assert(text.includes(word),word);
 });
+test('Actual 60-minute capacity experiments match independent enumeration: gains0/46/62 dollars',()=>{equal(defaultResult.expansions.map(r=>r.plan.objective),[94100,98700,100300]);equal(defaultResult.expansions.map(r=>r.plan.quantities),[[5,8,16],[15,6,12],[5,29,6]]);assert(defaultResult.expansions.every(r=>r.optimal));});
+test('Tiny feasible polygon has only (0,0),(4,0),(8/3,8/3),(0,4); every vertex meets inequalities',()=>{const vertices=feasibleRegion(tiny);equal(vertices.length,4);for(const expected of [[0,0],[4,0],[8/3,8/3],[0,4]])assert(vertices.some(v=>Math.hypot(v[0]-expected[0],v[1]-expected[1])<1e-7));assert(vertices.every(v=>allocation(tiny,[...v,0],false).feasible));equal(feasibleRegion(defaults),null);});
+test('Original bakery is retained as a zero-gap alternate at600 oven minutes',async()=>{const s=clone(defaults);s.capacities[1]=600;const r=await solve(s);equal(r.integer.plan.objective,95500);near(r.relaxation.plan.objective,95500);});
 let passed=0;
 for(const t of tests){const li=document.createElement('li');try{await t.run();passed++;li.className='pass';li.textContent=`PASS — ${t.name}`;}catch(error){li.className='fail';li.textContent=`FAIL — ${t.name}: ${error.message}`;}document.getElementById('results').append(li);document.getElementById('status').textContent=`${passed}/${tests.length} passed; ${document.querySelectorAll('.fail').length} failed. ${document.querySelectorAll('li').length<tests.length?'Still running…':'Complete.'}`;}

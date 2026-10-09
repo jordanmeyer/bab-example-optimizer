@@ -17,3 +17,7 @@ Default optimum:5breakfast/5tea/18celebration batches,$955contribution; prep470/
 RuntimeHiGHS1.15.3 and local WASM; buildVite8.3.4. No runtime service, font, tile, telemetry, upload or storage. Dependencies are pinned and third-party notices are published. The exact bounded HiGHS worker configuration passed independent review and the canonical approved-dependency check. Approval does not establish general solver or browser compatibility.
 
 Source destination: `https://github.com/jordanmeyer/bab-example-optimizer`. Publication is coordinator-owned after independent PASS; see [DEPLOYMENT.md](DEPLOYMENT.md). Public commit attribution is Jordan Meyer <jordanmeyer@protonmail.com>, explicitly authorized for this campaign. Evaluation and limitations are in [EVALUATION.md](EVALUATION.md); independent findings belong to [REVIEW.md](REVIEW.md).
+
+## Revision
+
+[How this was built](BUILD-STORY.md). Default oven590 exposes a real integrality gap; three independent extra-hour solves show capacity value and one-click changes. The two-product lesson includes its feasible polygon. Fonts are bundled EB Garamond/Open Sans under OFL. Preview9704; tests9703.

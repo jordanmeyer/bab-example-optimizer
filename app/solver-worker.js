@@ -12,6 +12,12 @@ self.onmessage = async ({ data: scenario }) => {
     const integer = highs.solve(modelText(scenario), options);
     self.postMessage({ kind: 'phase', text: 'Checking the fractional upper bound…' });
     const relaxation = highs.solve(modelText(scenario, false), options);
-    self.postMessage({ kind: 'result', integer, relaxation });
+    self.postMessage({ kind: 'phase', text: 'Testing 60 extra minutes of each resource…' });
+    const expansions=scenario.capacities.map((capacity,r)=>{
+      if(capacity>9940)return null;
+      const changed=structuredClone(scenario);changed.capacities[r]+=60;
+      return highs.solve(modelText(changed), options);
+    });
+    self.postMessage({ kind: 'result', integer, relaxation, expansions });
   } catch (error) { self.postMessage({ kind: 'error', message: error.message }); }
 };

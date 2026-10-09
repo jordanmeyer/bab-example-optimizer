@@ -13,3 +13,7 @@ The continuous LP relaxes only whole-batch policy and shares every other coeffic
 No chart library: native resource bars have a real exact semantic table alternative. Local Georgia/Arial and canonical designer tokens provide a calm navy/royal/copper operating worksheet without external fonts or institutional logos. Desktop and320px fixed frames are used because shared host viewport changes are prohibited. Clipboard fallback exposes selectable text ifpermissionunavailable; nothing is persisted or uploaded.
 
 Simplification pass: keep only one model generation/verification path, one cancellable solver interface and native forms. No generic modeling language, state-management framework, saved scenarios, uploads, solver configuration UI or speculative abstraction. Controlled x0/x1/x2IDs prevent labels from becoming solver syntax. Only authored labels and numeric validated results enter HTML templates.
+
+## 2026-10-09 user-authorized live revision
+
+Change default oven capacity600→590 minutes to expose a real$5 integrality gap. Retain600 as the honest zero-gap test. Add three exact integer re-solves for+60 resource minutes, with gross gains and one-click adoption, rather than inferring value from slack. Plot the actual two-product feasible region and remove inactive product clutter. Bundle canonical licensed fonts and public build provenance; collapse long secondary sections. These are authorized revisions, not fabricated student exchanges.

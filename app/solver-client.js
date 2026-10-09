@@ -22,13 +22,13 @@ export function createSolver(onPhase = () => {}) {
         worker.terminate();
         if (error) reject(error); else resolve(result);
       };
-      const timer = setTimeout(() => finish(Error('The solver did not respond within 15 seconds. No allocation is being recommended; try again.')), 15000);
+      const timer = setTimeout(() => finish(Error('The solver did not respond within 35 seconds. No allocation is being recommended; try again.')), 35000);
       active = { worker, timer, reject };
       worker.onmessage = ({ data }) => {
         if (active?.worker !== worker) return;
         if (data.kind === 'phase') onPhase(data.text);
         else if (data.kind === 'error') finish(Error(data.message));
-        else finish(null, { integer: interpret(scenario, data.integer), relaxation: interpret(scenario, data.relaxation, false) });
+        else finish(null, { integer: interpret(scenario, data.integer), relaxation: interpret(scenario, data.relaxation, false), expansions: data.expansions.map((raw,r)=>{if(!raw)return null;const s=structuredClone(scenario);s.capacities[r]+=60;return interpret(s,raw);}) });
       };
       worker.onerror = () => finish(Error('The local worker could not load or run. Check browser support, then retry.'));
       worker.postMessage(scenario);
