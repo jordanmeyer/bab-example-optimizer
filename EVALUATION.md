@@ -67,3 +67,9 @@ Second source re-review at751aca5: geometry correctly omitted the objective line
 Root observed 27/27 passing cases in the actual browser at current application source `bd31dc171c1500a1d70ff0a33bc654abf7d36a96`. This includes the real-worker range cases for 9940, 9941 and 10000; source/model review by the data agent also passed. Root additionally set ordinary Celebration minimum/maximum to zero, solved, adopted 60 more prep minutes and found its fields still visible; maximum 18 could be restored and solved. Tiny hides the third product, Reset reveals it, and the tiny allocation is 3/2 with $23 contribution.
 
 This report changes no app source and repeats no unchanged tests. Complete pending/busy/cancel/retry interactions, provisional-state UI, clipboard, 320px and 200% text remain pending. Limited-incumbent adapter evidence is not a naturally induced solver timeout. Actual screen-reader (ALL-11) and novice (ALL-16) gates remain open. Earlier visibility/status/caption source failures remain preserved.
+
+## Root production worker-state witness — source bd31dc171
+
+The coordinator cancelled the actual initial worker and observed “Solve cancelled. The worker stopped; solve again when ready.” Retry completed with Optimal status. Setting prep capacity to 100 made the 4/3/2 minimum commitments infeasible: the app reported 118 minutes required, an 18-minute shortfall, and no allocation. Editing prep hid the old allocation. These observations and the earlier 27/27, zero-maximum and tiny-case checks are retained in course `browser-states.json`.
+
+The attempted edit-during-solve reached a solve that had already completed, so that concurrency path remains unverified. No naturally time-limited/nonoptimal result was induced. Remaining layout/copy/complete interaction checks, actual screen-reader and novice observations remain open. No application source or tests changed for this report.
