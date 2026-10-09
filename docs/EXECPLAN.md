@@ -10,7 +10,8 @@ A user can see what additional resource minutes would earn and why fractional so
 
 - [x] 2026-10-09: Read requirements, existing plan/source and current skills; fetch clean origin.
 - [x] 2026-10-09: Implement actual capacity re-solves, new default gap, polygon and typography/provenance.
-- [ ] 2026-10-09: Checkpoint and final browser/production evaluation; independent review and publication.
+- [x] 2026-10-09: Checkpoint and final developer browser/production evaluation.
+- [ ] 2026-10-09: Independent review and publication.
 
 ## Surprises & Discoveries
 
@@ -22,7 +23,7 @@ The revised integer optimum leaves4 oven minutes unused but still gains$46 from 
 
 ## Outcomes & Retrospective
 
-Implementation complete; final evaluation and independent review pending. Preserve earlier report rounds.
+Implementation and developer evaluation complete; independent review pending. Preserve earlier report rounds.
 
 ## Context and Orientation
 
