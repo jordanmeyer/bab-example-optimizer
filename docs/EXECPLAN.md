@@ -1,57 +1,70 @@
-# Explain capacity value and whole-batch decisions
+# Put solve controls beside the decision and teach the constraints
 
-Living ExecPlan maintained under the supplied ~/.codex/PLANS.md rules.
+
+This living plan follows ~/.codex/PLANS.md and the remaining126-item October9 checklist. Preserve previous source/evaluation history.
 
 ## Purpose / Big Picture
 
-A user can see what additional resource minutes would earn and why fractional solutions cannot simply be rounded. Default panels compare three actual extra-hour solves; the two-product preset shows feasible geometry.
+
+Students can apply edited assumptions or cancel a busy solve directly beside its status. Bounded prediction tasks expose greedy allocation, infeasibility and omitted scheduling assumptions. Capacity limits remain explicit.
 
 ## Progress
 
-- [x] 2026-10-09: Read requirements, existing plan/source and current skills; fetch clean origin.
-- [x] 2026-10-09: Implement actual capacity re-solves, new default gap, polygon and typography/provenance.
-- [x] 2026-10-09: Checkpoint and final developer browser/production evaluation.
-- [x] 2026-10-09: Independent root review passed; publication authorized.
-- [x] 2026-10-09: Root live publication verification passed.
+
+- [x] Read full shared/OPT checklist, complete current source/worker/model/tests/style and existing plans.
+- [x] Move one canonical solve/cancel/status bar beside the result; correct deterministic-cap wording and persistence guidance.
+- [x] Add bounded exercises, actual-worker range cases and authored UI-state/200%-text QA frames.
+- [ ] Checkpoint, meaningful model/build checks and root actual production/browser/320px/200% review.
+- [ ] Independent root review before publication; preserve human-evidence gaps.
 
 ## Surprises & Discoveries
 
-The revised integer optimum leaves4 oven minutes unused but still gains$46 from another hour. A positive slack does not mean all added capacity has zero value when batches are indivisible.
+
+All cancellation mechanics already exist; placement hides the action promised by the busy panel. No second solver or duplicate action owner is needed. The model admits a simple greedy feasible allocation5/4/18 for$933, versus optimum5/8/16 for$941.
 
 ## Decision Log
 
-2026-10-09: Use590 oven minutes to make integrality visible without replacing the actual bakery. Compare fixed60-minute increments as finite integer experiments; avoid unsupported shadow-price claims. Retain600 as a zero-gap alternate. Share the existing solver loader in one worker for five bounded solves.
+
+2026-10-09: Move existing form-associated submit/cancel/status controls into the outcome panel, with a link from the long form. Open assumptions only when invalid fields need focus. Keep unchanged worker deadlines; add real-worker tests for oven9940,9941,10000. Use authored app-iframe event tests for fast cancel/edit transitions, explicitly distinguish them from human screen-reader tasks and simulated timeout adapters. Optional purchased-capacity pricing remains an exercise only.
 
 ## Outcomes & Retrospective
 
-Implementation and developer evaluation complete; independent root review passed. Preserve earlier report rounds.
+
+Implementation complete; fresh install/build and independent Python plus actual Node HiGHS cases pass. Prior25-case actual-browser record remains historical. Root actual browser27-case suite and UI/320px/200% review pending. No novice-readiness or screen-reader claim.
 
 ## Context and Orientation
 
-app/model.js owns coefficients, accounting, status checks and polygon geometry; app/solver-worker.js calls HiGHS and app/solver-client.js manages cancellation/deadlines. app/app.js and index.html own interaction. tests/tests.js exercises the real worker; scripts/oracles.py independently enumerates integer decisions.
+
+app/model.js owns allocation/rationale/validation; solver-worker.js calls pinned HiGHS; solver-client.js owns worker cancellation and deadline. app/app.js and index.html own the stateful UI. tests/tests.js covers real workers plus labeled adapters; scripts/oracles.py independently enumerates small models. Root has browser access; this subagent's inventory is empty.
 
 ## Plan of Work
 
-Extend the worker result with three capacity alternatives and compare only checked feasible plans. Revise the default capacity, add one-click adoption preserving previous solve, and draw two-product boundary intersections that satisfy every actual inequality. Update plans, tests and BUILD-STORY, bundle licensed fonts, then checkpoint before final tests.
+
+Relocate existing actions/status without adding parallel controls. Pending and error results keep Solve reachable; busy results expose Cancel. Add precise assumed-demand wording and total-minutes versus schedule copy. Add prediction/answer tasks and references. Convert text sizes to relative units and keep the two-product diagram readable in a scrollable region. Add separate320px/200% authored frames. Freeze source, run required checks, then root performs actual browser tasks. Preserve failures and per-ID dispositions in course evidence/checklist-corrections/2026-10-09/optimizer.
 
 ## Concrete Steps
 
-In this repository run npm ci --cache /private/tmp/bab-npm-cache, the packaged check-dependencies.mjs, python3 scripts/oracles.py, npm run build. Serve npm run test:browser -- --port9703 and npm run preview -- --port9704 (separate --port argument and value); open /tests/ and /bab-example-optimizer/. Local production QA frames can be copied from tests to dist after build for inspection only; they are not part of the deployment build.
+
+Run npm ci --cache /private/tmp/bab-npm-cache; packaged check-dependencies.mjs; python3 scripts/oracles.py; npm run build. Test server9703/tests/; production9704/bab-example-optimizer/. Copy authored QA frames into local dist after build only; publishing build omits them. Commit app source before final root review and do not push before authorization.
 
 ## Validation and Acceptance
 
-Default5/8/16 earns$941, LP bound$946. Extra60 minutes prep/oven/packing gains$0/$46/$62. Tiny integer3/2 earns$23 versus fractional$24; rounding3/3 violates capacities. All real-worker and geometry tests pass. Inspect the production WASM, keyboard edits, cancel/retry, manual/copy, Back controls versus results, local fonts and320/390/1440 frames. Record failures rather than relabeling earlier evidence.
+
+Default941/LP946 and actual +60 gains0/46/62 retained. Greedy5/4/18 is feasible933;18 celebration alone misses breakfast/tea commitments. Oven157 is infeasible because minima require4×18+3×12+2×25=158. Oven9940 permits an experiment at10000;9941 and10000 suppress only the unsupported increment. Actual UI cancellation/retry/edit-during-solve must clear stale allocations; real limited-feasible result is attempted only if naturally reproducible and otherwise adapter-only. Root checks320px and200% text separately, visible reachable Solve/Cancel and all diagram labels. Actual novice and screen-reader tasks remain external gates.
 
 ## Idempotence and Recovery
 
-Locked npm install and notice/build steps repeat safely. Reset restores defaults; cancel terminates the worker. Only ordinary commits and authorized pushes after review; never rewrite public history.
+
+Reset restores defaults; cancellation and editing terminate workers. Repeated builds replace only dist. Ordinary commits preserve all historical evidence; no shared course checklist or plugin edits.
 
 ## Artifacts and Notes
 
-PLAN has derivations and bounds. EVALUATION binds observations to source. Course evidence stays in the assigned optimizer revision folder.
+
+BUILD-STORY has task/control/answer/limitation. EVALUATION distinguishes Node/model/browser and prior rounds. Per-ID evidence includes optional-extension disposition and open human tasks.
 
 ## Interfaces and Dependencies
 
-Solver result adds expansions, an array of checked integer results or null at the input limit. feasibleRegion(scenario) returns exact two-product vertices or null for three active products. No new dependencies; local HiGHS1.15.3/Vite8.3.4 and OFL font files only.
 
-Revision note: restores capacity exploration and geometry because the original app left those requested teaching behaviors incomplete.
+Use the existing form attribute to associate the relocated submit button with #scenario. No dependency or solver API change. HiGHS1.15.3/Vite8.3.4 and licensed local fonts remain pinned.
+
+Revision note: applies remaining teaching, action-placement and range-boundary items without expanding the optimization model.

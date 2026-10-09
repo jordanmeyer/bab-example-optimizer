@@ -77,7 +77,7 @@ export function rationale(s, result) {
     ...resources.map((n, r) => `${n}: ${p.used[r]} / ${s.capacities[r]} minutes used; slack ${p.slack[r]} minutes.`),
     ...names.map((n, i) => { const x = s.products[i]; return `${n}: ${money(x.contribution)}/batch; commitment ${x.min}, demand maximum ${x.max}; prep/oven/packing ${x.use.join('/')} minutes/batch.`; }),
     result.relaxation.optimal && result.relaxation.plan ? `Continuous LP upper bound: ${money(result.relaxation.plan.objective)} (rounded to cents); fractional quantities are not a production recommendation.` : `Continuous relaxation status: ${result.relaxation.status}; no proven LP upper bound shown.`,
-    '12 boxes per batch. Linear resource use and contribution, whole nonnegative batches, fixed demand ceilings and explicit minimum commitments. Ties may return any optimal mix; no hidden customer priority. No sequencing, spoilage, overtime tiers or uncertainty. Binding capacity does not prove a valuable expansion. Validate the assumptions before a real decision.',
+    '12 boxes per batch. Linear resource use and contribution, whole nonnegative batches, fixed demand ceilings and explicit minimum commitments. Ties may return any optimal mix; no hidden customer priority. Capacities are additive total productive minutes, not simultaneous trays or a timed schedule. Demand maxima are assumed ceilings, not guaranteed sales. No sequencing, spoilage, overtime tiers or uncertainty. Binding capacity does not prove a valuable expansion. Validate the assumptions before a real decision.',
   ].join('\n');
 }
 

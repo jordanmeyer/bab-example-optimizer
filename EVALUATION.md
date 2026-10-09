@@ -51,3 +51,9 @@ Initial production console logs were empty. After CUA navigation a source-less M
 ## 2026-10-09 independent root review
 
 Root independently reviewed evaluated source b8f26df40e669e64aabcf8b5f33bd33b400485a2 and issued PASS. It read model/worker/client changes and reproduced enumeration; observed the actual25/25 browser suite, default$941/LP$946, extra-hour gains$0/$46/$62, oven650→$987 with$46 comparison, and the tiny3/2=$23 versus$24 polygon. Back showed an honest loading state. Initial console logs were empty and the relevant source comparison was clean. This report-only update does not change evaluated application source. Root authorized publication of main; live verification follows separately.
+
+## 2026-10-09 remaining-checklist corrections
+
+Moved the existing Solve/Cancel/status bar next to the result, preserving one action owner and actual worker semantics. Added precise demand-cap and schedule boundaries, bounded exercises, readable relative text/scrollable geometry, and range tests9940/9941/10000. Fresh dependency check, npm ci and production build pass (existing HiGHS node:module browser-externalization notice retained). Independent Python enumeration and actual Node HiGHS confirm default941, oven157 infeasible, high-oven24/9/5 at998; greedy5/4/18 earns933. These are numeric/Node results, not new browser evidence.
+
+The subagent has no enabled browser. Root must run the27-case real-worker suite, actual production Cancel/retry/edit/invalid/range/manual/copy tasks and separate320px/200% text review. tests/ui-states.html is an authored actual-app/real-worker event harness for states that complete too quickly for manual clicks; no worker response is stubbed. Adapter-only feasible-limited cases remain labeled; no natural timeout is claimed. Actual novice and screen-reader tasks remain open.

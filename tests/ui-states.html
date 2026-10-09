@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Optimizer actual UI state checks</title><style>body{font:16px sans-serif;margin:16px}iframe{width:1280px;height:850px;border:1px solid #bbb;display:block}pre{white-space:pre-wrap}button{padding:12px;margin:8px}</style></head><body><h1>Actual app, actual worker, deterministic UI events</h1><p>These authored checks click the app's own controls as soon as busy appears, so a fast local solver cannot outrun the cancellation/edit scenario. No worker response is stubbed. This is automated UI evidence, not a novice or screen-reader test.</p><button id="cancel-test">Exercise cancellation and retry</button><button id="edit-test">Exercise edit during solve</button><pre id="log">Load the frame, then choose a scenario.</pre><iframe title="Production optimizer under test"></iframe><script>
+const frame=document.querySelector('iframe');frame.src=location.pathname.includes('/tests/')?'/app/':'./index.html';
+const log=document.querySelector('#log');
+const assert=(value,message)=>{if(!value)throw Error(message);};
+function until(d,condition){return new Promise((resolve,reject)=>{const check=()=>{if(!condition())return;observer.disconnect();clearTimeout(timer);resolve();};const observer=new MutationObserver(check);const timer=setTimeout(()=>{observer.disconnect();reject(Error('UI did not reach expected state within40seconds'));},40000);observer.observe(d.body,{subtree:true,childList:true,characterData:true,attributes:true});check();});}
+async function exercise(mode){
+ document.querySelectorAll('button').forEach(button=>button.disabled=true);log.textContent='Running actual UI scenario…';
+ const d=frame.contentDocument,$=id=>d.getElementById(id),records=[];
+ try{
+  $('reset').click();await until(d,()=>$('status').textContent.startsWith('Solve complete: Optimal')&&$('scenario').getAttribute('aria-busy')==='false');
+  assert(!d.querySelector('.workspace').open,'Assumptions must start collapsed for the cancellation placement check');
+  const during=new Promise((resolve,reject)=>{const observer=new MutationObserver(()=>{if($('scenario').getAttribute('aria-busy')!=='true')return;observer.disconnect();try{
+   assert($('cancel').getClientRects().length>0&&!$('cancel').hidden,'Cancellation is not visibly beside busy result');
+   records.push({phase:'busy',title:$('outcome-title').textContent,cancelVisible:true,assumptionsCollapsed:!d.querySelector('.workspace').open});
+   if(mode==='cancel')$('cancel').click();else{$('capacity-1').value='157';$('capacity-1').dispatchEvent(new frame.contentWindow.Event('input',{bubbles:true}));}
+   assert($('evidence').hidden,'Stale evidence survived cancellation/edit');assert($('scenario').getAttribute('aria-busy')==='false','Worker state remained busy');assert(!$('solve').disabled,'Retry solve is disabled');
+   records.push({phase:mode,status:$('status').textContent,title:$('outcome-title').textContent,evidenceHidden:$('evidence').hidden});resolve();
+  }catch(error){reject(error);}});observer.observe($('scenario'),{attributes:true,attributeFilter:['aria-busy']});});
+  $('solve').click();await during;
+  $('solve').click();await until(d,()=>$('status').textContent.startsWith('Solve complete:')&&$('scenario').getAttribute('aria-busy')==='false');
+  const title=$('outcome-title').textContent;
+  assert(mode==='cancel'?title.includes('$941'):title.includes('commitments do not fit'),`Unexpected retry result: ${title}`);
+  if(mode==='edit')assert($('outcome-copy').textContent.includes('158 used / 157 available'),'Infeasibility lacks minimum-use arithmetic');
+  records.push({phase:'retry',title,explanation:$('outcome-copy').textContent,status:$('status').textContent});log.textContent='PASS — '+mode+' with actual app and worker\n'+JSON.stringify(records,null,2);
+ }catch(error){log.textContent='FAIL — '+error.message+'\n'+JSON.stringify(records,null,2);}
+ document.querySelectorAll('button').forEach(button=>button.disabled=false);
+}
+document.querySelector('#cancel-test').onclick=()=>exercise('cancel');document.querySelector('#edit-test').onclick=()=>exercise('edit');
+</script></body></html>

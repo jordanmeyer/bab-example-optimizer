@@ -35,7 +35,7 @@ function clearErrors() {
 function setBusy(value) {
   busy = value;
   $('solve').disabled = value;
-  $('cancel').disabled = !value;
+  $('cancel').hidden = !value;
   $('scenario').setAttribute('aria-busy', String(value));
 }
 function invalidate(message = 'Assumptions changed. Solve again to see a current allocation.') {
@@ -74,7 +74,7 @@ function render(s, result) {
   const total = p.quantities.reduce((a, b) => a + b, 0);
   $('outcome-copy').textContent = `${total} whole batches · ${total * 12} boxes. ${integer.optimal ? 'Proven optimal under the current assumptions.' : 'Feasible, but not proven optimal before the solver stopped.'} ${p.objective < 0 ? 'The contribution is negative: the required commitments force costly production under these assumptions.' : 'This is contribution after variable costs; fixed business costs are excluded.'}`;
   if(relaxation.optimal&&relaxation.plan&&relaxation.plan.objective-p.objective>0.01)$('outcome-copy').textContent+=` Allowing partial batches raises the bound to ${money(relaxation.plan.objective)}; whole batches give up ${money(relaxation.plan.objective-p.objective)}.`;
-  $('solution-rows').innerHTML = names.flatMap((n, i) => s.products[i].max===0?[]:[`<tr><td>${n}</td><td><strong>${p.quantities[i]}</strong></td><td>${p.quantities[i] * 12}</td><td>${money(p.quantities[i] * s.products[i].contribution)}</td><td class="bound">${[p.quantities[i] === s.products[i].min ? 'Minimum commitment met' : '', p.quantities[i] === s.products[i].max ? 'Limited by expected sales' : ''].filter(Boolean).join(' · ') || 'Within production limits'}</td></tr>`]).join('');
+  $('solution-rows').innerHTML = names.flatMap((n, i) => s.products[i].max===0?[]:[`<tr><td>${n}</td><td><strong>${p.quantities[i]}</strong></td><td>${p.quantities[i] * 12}</td><td>${money(p.quantities[i] * s.products[i].contribution)}</td><td class="bound">${[p.quantities[i] === s.products[i].min ? 'Minimum commitment met' : '', p.quantities[i] === s.products[i].max ? 'At assumed demand maximum' : ''].filter(Boolean).join(' · ') || 'Within production limits'}</td></tr>`]).join('');
   $('resource-bars').innerHTML = resources.map((n, r) => `<div><div class="resource-top"><span>${n}</span><span>${p.slack[r] === 0 ? 'Binding' : `${p.slack[r]} min open`}</span></div><div class="track ${p.slack[r] === 0 ? 'binding' : ''}"><span style="width:${s.capacities[r] ? p.used[r] / s.capacities[r] * 100 : 0}%"></span></div></div>`).join('');
   $('resource-rows').innerHTML = resources.map((n, r) => `<tr><td>${n}</td><td>${p.used[r]}</td><td>${s.capacities[r]}</td><td class="${p.slack[r] === 0 ? 'binding-label' : ''}">${p.slack[r]}${p.slack[r] === 0 ? ' · binding' : ''}</td></tr>`).join('');
   if (relaxation.optimal && relaxation.plan && relaxation.plan.objective-p.objective>0.01) {
@@ -106,6 +106,7 @@ async function run(baseline=null) {
     $('errors').innerHTML = errors.map(e => `<p>${e.message}</p>`).join('');
     $('errors').hidden = false;
     errors.forEach(e => $(e.id).setAttribute('aria-invalid', 'true'));
+    document.querySelector('.workspace').open=true;
     $(errors[0].id).focus();
     $('status').textContent = 'Correct the highlighted assumptions. No allocation is being recommended.';
     return;
