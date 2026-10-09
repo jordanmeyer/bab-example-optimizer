@@ -14,7 +14,7 @@ A fictional bakery manager can edit tomorrow's capacities, product economics and
 - [x] (2026-10-09) Implement pure model, worker lifecycle and complete UI.
 - [x] (2026-10-09) Actual browser suite 22/22, production default/tiny/manual/copy/infeasible/zero/negative/cancel/retry, keyboard and native Back checks; desktop/narrow visuals.
 - [x] (2026-10-09) Freeze 2e4eef40bf2091800e2f07c0144888c6b264f8ee; clean pre/post source/PLAN, fresh build, final 22/22 and maximum-money narrow production evidence.
-- [ ] Iterate with independent reviewer to PASS; coordinator publishes.
+- [x] Independent reviewer passed frozen2e4eef4; coordinator published and verified livee23c930.
 
 ## Surprises & Discoveries
 
@@ -30,7 +30,7 @@ Decision: terminate/recreate worker on cancel, reset and edits; hide prior resul
 
 ## Outcomes & Retrospective
 
-The complete local app and 22-case browser suite work. Actual production states include default, fractional lesson, manual allocation, infeasible, zero, negative contribution, cancellation/retry and history return. Desktop and narrow layouts were inspected. Final frozen-source evaluation, independent review and publication remain. No app review pass has been claimed.
+The complete local app and 22-case browser suite work. Actual production states include default, fractional lesson, manual allocation, infeasible, zero, negative contribution, cancellation/retry and history return. Desktop and narrow layouts were inspected. Frozen-source evaluation and independent review passed at2e4eef4. Publicatione23c930 and its actual live known answers passed; see DEPLOYMENT.md.
 
 ## Context and Orientation
 
@@ -44,7 +44,7 @@ First build and browser-test pure model and worker. Construct LP text using only
 
 ## Concrete Steps
 
-From this directory, prepend /Users/jordan/.nvm/versions/node/v22.19.0/bin to PATH. Run npm ci --ignore-scripts --cache /private/tmp/bab-optimizer-npm-cache; npm run build; npm run test:browser -- --port9515; npm run preview -- --port9516. The browser test URL is http://127.0.0.1:9515/tests/ and actual production URL http://127.0.0.1:9516/bab-example-optimizer/. Run the canonical dependency checker at /Users/jordan/Projects/decision-999/plugins/browser-app-builder/scripts/check-dependencies.mjs with this directory. Candidate status may reject HiGHS until coordinator promotion; record that actual boundary rather than modifying it.
+From this directory, prepend /Users/jordan/.nvm/versions/node/v22.19.0/bin to PATH. Run npm ci --ignore-scripts --cache /private/tmp/bab-optimizer-npm-cache; npm run build; npm run test:browser -- --port 9515; npm run preview -- --port 9516. The browser test URL is http://127.0.0.1:9515/tests/ and actual production URL http://127.0.0.1:9516/bab-example-optimizer/. Run the canonical dependency checker at /Users/jordan/Projects/decision-999/plugins/browser-app-builder/scripts/check-dependencies.mjs with this directory. Candidate status may reject HiGHS until coordinator promotion; record that actual boundary rather than modifying it.
 
 ## Validation and Acceptance
 
@@ -60,7 +60,7 @@ Independent Python standard-library enumeration used full confirmed bounds and e
 
 ## Interfaces and Dependencies
 
-Scenario: capacities[3] and products[3], each with contribution(integercents), min/max(integerbatches), use[3](integerminutes). model.js exports validate, modelText, allocation, interpret, rationale and presets. solveScenario returns the checked integer result and relaxation result; cancel rejects active work and terminatesworker. Runtimehighs1.15.3; buildVite8.3.4; Node22.19.0/npm10.9.3. No other library/service.
+A scenario has three capacities and three products. Each product has contribution in integer cents, minimum/maximum integer batches, and three resource-use values in integer minutes. model.js exports validate, modelText, allocation, interpret, rationale and presets. solveScenario returns the checked integer result and relaxation result; cancel rejects active work and terminatesworker. Runtimehighs1.15.3; buildVite8.3.4; Node22.19.0/npm10.9.3. No other library/service.
 
 Initial plan written2026-10-09after actual student confirmation.
 
