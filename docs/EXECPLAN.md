@@ -12,7 +12,7 @@ A user can see what additional resource minutes would earn and why fractional so
 - [x] 2026-10-09: Implement actual capacity re-solves, new default gap, polygon and typography/provenance.
 - [x] 2026-10-09: Checkpoint and final developer browser/production evaluation.
 - [x] 2026-10-09: Independent root review passed; publication authorized.
-- [ ] 2026-10-09: Live publication verification.
+- [x] 2026-10-09: Root live publication verification passed.
 
 ## Surprises & Discoveries
 
