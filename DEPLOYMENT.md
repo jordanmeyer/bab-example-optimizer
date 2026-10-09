@@ -1,7 +1,12 @@
-# Deployment record
+# Deployment
 
-Target repository: `jordanmeyer/bab-example-optimizer`; intended public URL `https://jordanmeyer.github.io/bab-example-optimizer/`. Vitebase `/bab-example-optimizer/`; source link matches. Pages workflow is copied from Browser App Builder's managed template, main-only with exact Node22.19.0 and committed lockfile. It builds and publishes onlydist. Tests, docs, caches and node_modules are not site output.
+Public repository: https://github.com/jordanmeyer/bab-example-optimizer
+Live application: https://jordanmeyer.github.io/bab-example-optimizer/
 
-The developer does not publish. Independent reviewer PASS, final source/PLAN freshness, root's candidate inventory decision/checker reconciliation, and coordinator authorization precede GitHub creation/push. Live deployment, update and browser verification have not occurred. Root appends actual workflow/live evidence after publishing; never infer success from a localbuild.
+Reviewed/evaluated source: `2e4eef40bf2091800e2f07c0144888c6b264f8ee`.
+Published commit: `e23c930b353d4381b14db735efdf6122e535a832`.
+GitHub Actions run: https://github.com/jordanmeyer/bab-example-optimizer/actions/runs/37894236996 — completed/success.
 
-Public Git attribution is the explicitly authorized Jordan Meyer <jordanmeyer@protonmail.com>. No credentials are in this repository. Ordinary commits preserve failed rounds and updates; no forcepush or source rewriting.
+On2026-10-09 the coordinator created the explicitly authorized public repository, selected GitHub Actions Pages, and pushed ordinary main history after independent APPLICATION PASS and canonical dependency-check success. Relevant application/test/tooling/workflow/PLAN paths still matched the reviewed checkpoint; only reports followed. Publication contains app assets, local HiGHS WASM/worker and notices, with no tests, handoffs or dependency directory.
+
+Actual live browser loaded the repository-path app and produced default$955 with5/5/18, then the lesson$23 with3/2/0 andLP$24. Live script was `assets/index-Dv7SffEg.js`; source/notices links pointed to this repository and local published notice. No warning/error logs were observed. Successful live computation verifies this deployed worker/WASM path. This is not a complete network capture or universal browser guarantee. Screenshot and independent UI witness are retained in the course campaign evidence.
